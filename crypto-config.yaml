@@ -24,8 +24,8 @@ PeerOrgs:
   # ---------------------------------------------------------------------------
   # Org1
   # ---------------------------------------------------------------------------
-  - Name: Org1
-    Domain: org1.example.com
+  - Name: organization1
+    Domain: organization1.example.com
     EnableNodeOUs: true
     # ---------------------------------------------------------------------------
     # "Specs"
@@ -43,11 +43,11 @@ PeerOrgs:
     #                 which obtains its values from the Spec.Hostname and
     #                 Org.Domain, respectively.
     # ---------------------------------------------------------------------------
-    # Specs:
+    Specs:
     #   - Hostname: foo # implicitly "foo.org1.example.com"
     #     CommonName: foo27.org5.example.com # overrides Hostname-based FQDN set above
-    #   - Hostname: bar
-    #   - Hostname: baz
+      - Hostname: node1
+      - Hostname: node2
     # ---------------------------------------------------------------------------
     # "Template"
     # ---------------------------------------------------------------------------
@@ -60,8 +60,8 @@ PeerOrgs:
     # sections and the aggregate nodes will be created for you.  Take care with
     # name collisions
     # ---------------------------------------------------------------------------
-    Template:
-      Count: 2
+    # Template:
+      # Count: 2
       # Start: 5
       # Hostname: {{.Prefix}}{{.Index}} # default
     # ---------------------------------------------------------------------------
@@ -74,10 +74,13 @@ PeerOrgs:
   # ---------------------------------------------------------------------------
   # Org2: See "Org1" for full specification
   # ---------------------------------------------------------------------------
-  - Name: Org2
-    Domain: org2.example.com
+  - Name: organization2
+    Domain: organization2.example.com
     EnableNodeOUs: true
-    Template:
-      Count: 2
+    # Template:
+    #   Count: 2
+    Specs:
+      - Hostname: node1
+      - Hostname: node2
     Users:
       Count: 1
