@@ -9,21 +9,9 @@ services:
 
   orderer.example.com:
     container_name: orderer.example.com
-    image: hyperledger/fabric-orderer
-    environment:
-      - ORDERER_GENERAL_LOGLEVEL=INFO
-      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
-      - ORDERER_GENERAL_GENESISMETHOD=file
-      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
-      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
-      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
-      # enabled TLS
-      # - ORDERER_GENERAL_TLS_ENABLED=true
-      # - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
-      # - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
-      # - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
-    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
-    command: orderer
+    extends:
+      file: peer-base.yaml
+      service: orderer-base
     volumes:
     - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
     - ../crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp:/var/hyperledger/orderer/msp
@@ -46,7 +34,7 @@ services:
     volumes:
         - /var/run/:/host/var/run/
         - ../crypto-config/peerOrganizations/organization1.example.com/peers/node1.organization1.example.com/msp:/etc/hyperledger/fabric/msp
-        # - ../crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls:/etc/hyperledger/fabric/tls
+        - ../crypto-config/peerOrganizations/organization1.example.com/peers/node1.organization1.example.com/tls:/etc/hyperledger/fabric/tls
         # - peer0.org1.example.com:/var/hyperledger/production
     ports:
       - 7051:7051
@@ -66,7 +54,7 @@ services:
     volumes:
         - /var/run/:/host/var/run/
         - ../crypto-config/peerOrganizations/organization1.example.com/peers/node2.organization1.example.com/msp:/etc/hyperledger/fabric/msp
-        # - ../crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls:/etc/hyperledger/fabric/tls
+        - ../crypto-config/peerOrganizations/organization1.example.com/peers/node2.organization1.example.com/tls:/etc/hyperledger/fabric/tls
         # - peer1.org1.example.com:/var/hyperledger/production
 
     ports:
@@ -87,7 +75,7 @@ services:
     volumes:
         - /var/run/:/host/var/run/
         - ../crypto-config/peerOrganizations/organization2.example.com/peers/node1.organization2.example.com/msp:/etc/hyperledger/fabric/msp
-        # - ../crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls:/etc/hyperledger/fabric/tls
+        - ../crypto-config/peerOrganizations/organization2.example.com/peers/node1.organization2.example.com/tls:/etc/hyperledger/fabric/tls
         # - peer0.org2.example.com:/var/hyperledger/production
     ports:
       - 9051:7051
@@ -107,7 +95,7 @@ services:
     volumes:
         - /var/run/:/host/var/run/
         - ../crypto-config/peerOrganizations/organization2.example.com/peers/node2.organization2.example.com/msp:/etc/hyperledger/fabric/msp
-        # - ../crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/tls:/etc/hyperledger/fabric/tls
+        - ../crypto-config/peerOrganizations/organization2.example.com/peers/node2.organization2.example.com/tls:/etc/hyperledger/fabric/tls
         # - peer1.org2.example.com:/var/hyperledger/production
     ports:
       - 10051:7051

@@ -9,8 +9,8 @@ import (
 // sdk相关配置
 var (
 	SDK           *fabsdk.FabricSDK     // Fabric提供的SDK
-	ChannelName   = "channelname"       // 通道名称
-	ChaincodeName = "chaincodename"     // 链码名称
+	ChannelName   = "mychannel"         // 通道名称
+	ChaincodeName = "mychaincode"       // 链码名称
 	Org           = "Org1"              // 组织
 	User          = "Admin"             // 用户
 	ConfigPath    = "./config_e2e.yaml" // 配置文件路径

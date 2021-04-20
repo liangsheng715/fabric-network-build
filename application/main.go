@@ -19,7 +19,7 @@ func main() {
 			fmt.Println(err.Error())
 			return
 		}
-		context.JSON(200, resp.Payload)
+		context.JSON(200, string(resp.Payload))
 	})
 	router.POST("/testPost", func(context *gin.Context) {
 		fcn := context.PostForm("fcn")
@@ -35,7 +35,7 @@ func main() {
 			fmt.Println(err.Error())
 			return
 		}
-		context.JSON(200, resp.Payload)
+		context.JSON(200, resp)
 	})
 	err := router.Run(":8080")
 	if err != nil {

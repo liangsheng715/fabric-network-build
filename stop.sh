@@ -21,9 +21,12 @@ function removeUnwantedImages() {
   fi
 }
 
-docker-compose -f docker-compose-cli.yaml down
+docker-compose -f docker-compose-cli.yaml -f docker-compose-etcdraft2.yaml down --volumes --remove-orphans
 
 #Cleanup the chaincode containers
 clearContainers
 #Cleanup images
 removeUnwantedImages
+
+rm -rf channel-artifacts/*
+rm -rf crypto-config/*
