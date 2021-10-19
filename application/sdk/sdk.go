@@ -40,7 +40,7 @@ func ChannelExecute(fcn string, args [][]byte) (channel.Response, error) {
 		ChaincodeID: ChaincodeName,
 		Fcn:         fcn,
 		Args:        args,
-	}, channel.WithTargetEndpoints("node1.organization1.example.com", "node1.organization2.example.com"))
+	}, channel.WithTargetEndpoints("node1.organization1.example.com", "node1.organization2.example.com", "node1.organization3.example.com"))
 
 	if err != nil {
 		return channel.Response{}, err
@@ -64,5 +64,5 @@ func ChannelQuery(fcn string, args [][]byte) (channel.Response, error) {
 		ChaincodeID: ChaincodeName,
 		Fcn:         fcn,
 		Args:        args,
-	}, channel.WithTargetEndpoints("node1.organization1.example.com", "node1.organization2.example.com"))
+	}, channel.WithTargetEndpoints("node1.organization1.example.com", "node1.organization2.example.com", "node1.organization3.example.com"))
 }

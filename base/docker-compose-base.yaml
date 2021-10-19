@@ -100,3 +100,43 @@ services:
     ports:
       - 10051:7051
       - 10053:7053
+
+  node1.organization3.example.com:
+    container_name: node1.organization3.example.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=node1.organization3.example.com
+      - CORE_PEER_ADDRESS=node1.organization3.example.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=node1.organization3.example.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=node2.organization3.example.com:7051
+      - CORE_PEER_LOCALMSPID=organization3MSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/organization3.example.com/peers/node1.organization3.example.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/organization3.example.com/peers/node1.organization3.example.com/tls:/etc/hyperledger/fabric/tls
+        # - peer1.org2.example.com:/var/hyperledger/production
+    ports:
+      - 11051:7051
+      - 11053:7053
+
+  node2.organization3.example.com:
+    container_name: node2.organization3.example.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=node2.organization3.example.com
+      - CORE_PEER_ADDRESS=node2.organization3.example.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=node2.organization3.example.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=node1.organization3.example.com:7051
+      - CORE_PEER_LOCALMSPID=organization3MSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/organization3.example.com/peers/node2.organization3.example.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/organization3.example.com/peers/node2.organization3.example.com/tls:/etc/hyperledger/fabric/tls
+        # - peer1.org2.example.com:/var/hyperledger/production
+    ports:
+      - 12051:7051
+      - 12053:7053

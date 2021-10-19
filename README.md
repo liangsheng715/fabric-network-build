@@ -26,3 +26,13 @@ go build
 ./application
 ```
 
+
+
+http请求访问：
+
+```shell
+curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' -i http://localhost:8080/testPost --data 'fcn=invoke&arg1=a&arg2=b&arg3=10'
+
+curl -X GET -i 'http://localhost:8080/testGet?fcn=query&arg1=a'
+```
+

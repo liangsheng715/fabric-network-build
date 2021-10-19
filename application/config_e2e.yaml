@@ -65,7 +65,7 @@ client:
 
   # Root of the MSP directories with keys and certs.
   cryptoconfig:
-    path: /home/zcedu/GolandProjects/NetworkBuilding/crypto-config
+    path: ../crypto-config
 
   # Some SDKs support pluggable KV stores, the properties under "credentialStore"
   # are implementation specific
@@ -186,6 +186,46 @@ channels:
         eventSource: true
 
       node2.organization2.example.com:
+        # [Optional]. will this peer be sent transaction proposals for endorsement? The peer must
+        # have the chaincode installed. The app can also use this property to decide which peers
+        # to send the chaincode install request. Default: true
+        endorsingPeer: true
+
+        # [Optional]. will this peer be sent query proposals? The peer must have the chaincode
+        # installed. The app can also use this property to decide which peers to send the
+        # chaincode install request. Default: true
+        chaincodeQuery: true
+
+        # [Optional]. will this peer be sent query proposals that do not require chaincodes, like
+        # queryBlock(), queryTransaction(), etc. Default: true
+        ledgerQuery: true
+
+        # [Optional]. will this peer be the target of the SDK's listener registration? All peers can
+        # produce events but the app typically only needs to connect to one to listen to events.
+        # Default: true
+        eventSource: true
+
+      node1.organization3.example.com:
+        # [Optional]. will this peer be sent transaction proposals for endorsement? The peer must
+        # have the chaincode installed. The app can also use this property to decide which peers
+        # to send the chaincode install request. Default: true
+        endorsingPeer: true
+
+        # [Optional]. will this peer be sent query proposals? The peer must have the chaincode
+        # installed. The app can also use this property to decide which peers to send the
+        # chaincode install request. Default: true
+        chaincodeQuery: true
+
+        # [Optional]. will this peer be sent query proposals that do not require chaincodes, like
+        # queryBlock(), queryTransaction(), etc. Default: true
+        ledgerQuery: true
+
+        # [Optional]. will this peer be the target of the SDK's listener registration? All peers can
+        # produce events but the app typically only needs to connect to one to listen to events.
+        # Default: true
+        eventSource: true
+
+      node2.organization3.example.com:
         # [Optional]. will this peer be sent transaction proposals for endorsement? The peer must
         # have the chaincode installed. The app can also use this property to decide which peers
         # to send the chaincode install request. Default: true
@@ -358,6 +398,19 @@ organizations:
 #    certificateAuthorities:
 #      - ca.org2.example.com
 
+  Org3:
+    mspid: organization3MSP
+
+    # This org's MSP store (absolute path or relative to client.cryptoconfig)
+    cryptoPath:  peerOrganizations/organization3.example.com/users/{username}@organization3.example.com/msp
+
+    peers:
+      - node1.organization3.example.com
+      - node2.organization3.example.com
+
+#    certificateAuthorities:
+#      - ca.org2.example.com
+
   # Orderer Org name
   ordererorg:
       # Membership Service Provider ID for this organization
@@ -393,7 +446,7 @@ orderers:
 
     tlsCACerts:
       # Certificate location absolute path
-      path: /home/zcedu/GolandProjects/NetworkBuilding/crypto-config/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
+      path: ../crypto-config/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
 
   orderer2.example.com:
     # [Optional] Default: Infer from hostname
@@ -415,7 +468,7 @@ orderers:
 
     tlsCACerts:
       # Certificate location absolute path
-      path: /home/zcedu/GolandProjects/NetworkBuilding/crypto-config/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
+      path: ../crypto-config/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
 
   orderer3.example.com:
     # [Optional] Default: Infer from hostname
@@ -437,7 +490,7 @@ orderers:
 
     tlsCACerts:
       # Certificate location absolute path
-      path: /home/zcedu/GolandProjects/NetworkBuilding/crypto-config/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
+      path: ../crypto-config/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
 
   orderer4.example.com:
     # [Optional] Default: Infer from hostname
@@ -459,7 +512,7 @@ orderers:
 
     tlsCACerts:
       # Certificate location absolute path
-      path: /home/zcedu/GolandProjects/NetworkBuilding/crypto-config/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
+      path: ../crypto-config/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
 
   orderer5.example.com:
     # [Optional] Default: Infer from hostname
@@ -481,7 +534,7 @@ orderers:
 
     tlsCACerts:
       # Certificate location absolute path
-      path: /home/zcedu/GolandProjects/NetworkBuilding/crypto-config/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
+      path: ../crypto-config/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
 
 
 #
@@ -508,7 +561,7 @@ peers:
 
     tlsCACerts:
       # Certificate location absolute path
-      path: /home/zcedu/GolandProjects/NetworkBuilding/crypto-config/peerOrganizations/organization1.example.com/tlsca/tlsca.organization1.example.com-cert.pem
+      path: ../crypto-config/peerOrganizations/organization1.example.com/tlsca/tlsca.organization1.example.com-cert.pem
 
   node2.organization1.example.com:
     # this URL is used to send endorsement and query requests
@@ -528,7 +581,7 @@ peers:
 
     tlsCACerts:
       # Certificate location absolute path
-      path: /home/zcedu/GolandProjects/NetworkBuilding/crypto-config/peerOrganizations/organization1.example.com/tlsca/tlsca.organization1.example.com-cert.pem
+      path: ../crypto-config/peerOrganizations/organization1.example.com/tlsca/tlsca.organization1.example.com-cert.pem
 
   node1.organization2.example.com:
     url: localhost:9051
@@ -545,7 +598,7 @@ peers:
       allow-insecure: false
 
     tlsCACerts:
-      path: /home/zcedu/GolandProjects/NetworkBuilding/crypto-config/peerOrganizations/organization2.example.com/tlsca/tlsca.organization2.example.com-cert.pem
+      path: ../crypto-config/peerOrganizations/organization2.example.com/tlsca/tlsca.organization2.example.com-cert.pem
 
   node2.organization2.example.com:
     url: localhost:10051
@@ -562,7 +615,41 @@ peers:
       allow-insecure: false
 
     tlsCACerts:
-      path: /home/zcedu/GolandProjects/NetworkBuilding/crypto-config/peerOrganizations/organization2.example.com/tlsca/tlsca.organization2.example.com-cert.pem
+      path: ../crypto-config/peerOrganizations/organization2.example.com/tlsca/tlsca.organization2.example.com-cert.pem
+
+  node1.organization3.example.com:
+    url: localhost:11051
+    grpcOptions:
+      ssl-target-name-override: node1.organization3.example.com
+      # These parameters should be set in coordination with the keepalive policy on the server,
+      # as incompatible settings can result in closing of connection.
+      # When duration of the 'keep-alive-time' is set to 0 or less the keep alive client parameters are disabled
+      keep-alive-time: 0s
+      keep-alive-timeout: 20s
+      keep-alive-permit: false
+      fail-fast: false
+      # allow-insecure will be taken into consideration if address has no protocol defined, if true then grpc or else grpcs
+      allow-insecure: false
+
+    tlsCACerts:
+      path: ../crypto-config/peerOrganizations/organization2.example.com/tlsca/tlsca.organization2.example.com-cert.pem
+
+  node2.organization3.example.com:
+    url: localhost:12051
+    grpcOptions:
+      ssl-target-name-override: node2.organization3.example.com
+      # These parameters should be set in coordination with the keepalive policy on the server,
+      # as incompatible settings can result in closing of connection.
+      # When duration of the 'keep-alive-time' is set to 0 or less the keep alive client parameters are disabled
+      keep-alive-time: 0s
+      keep-alive-timeout: 20s
+      keep-alive-permit: false
+      fail-fast: false
+      # allow-insecure will be taken into consideration if address has no protocol defined, if true then grpc or else grpcs
+      allow-insecure: false
+
+    tlsCACerts:
+      path: ../crypto-config/peerOrganizations/organization2.example.com/tlsca/tlsca.organization2.example.com-cert.pem
 
 
 #
@@ -652,6 +739,16 @@ entityMatchers:
       urlSubstitutionExp: localhost:10051
       sslTargetOverrideUrlSubstitutionExp: node2.organization2.example.com
       mappedHost: node2.organization2.example.com
+
+    - pattern: (\w+).organization3.example.(\w+)
+      urlSubstitutionExp: localhost:11051
+      sslTargetOverrideUrlSubstitutionExp: node1.organization3.example.com
+      mappedHost: node1.organization3.example.com
+
+    - pattern: (\w+).organization3.example.(\w+)
+      urlSubstitutionExp: localhost:12051
+      sslTargetOverrideUrlSubstitutionExp: node2.organization3.example.com
+      mappedHost: node2.organization3.example.com
 
 #
 #    - pattern: (\w+).org2.example.(\w+)

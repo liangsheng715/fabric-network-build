@@ -1,10 +1,12 @@
 package main
 
 import (
+	"NetworkBuilding/application/sdk"
+	"bytes"
 	"fmt"
+
 	"github.com/gin-gonic/gin"
 )
-import "NetworkBuilding/application/sdk"
 
 func main() {
 	router := gin.Default()
@@ -19,7 +21,7 @@ func main() {
 			fmt.Println(err.Error())
 			return
 		}
-		context.JSON(200, string(resp.Payload))
+		context.JSON(int(resp.ChaincodeStatus), bytes.NewBuffer(resp.Payload).String())
 	})
 	router.POST("/testPost", func(context *gin.Context) {
 		fcn := context.PostForm("fcn")
@@ -35,7 +37,7 @@ func main() {
 			fmt.Println(err.Error())
 			return
 		}
-		context.JSON(200, resp)
+		context.JSON(int(resp.ChaincodeStatus), bytes.NewBuffer(resp.Payload).String())
 	})
 	err := router.Run(":8080")
 	if err != nil {

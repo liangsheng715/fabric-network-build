@@ -57,6 +57,22 @@ services:
     networks:
       - byfn
 
+  node1.organization3.example.com:
+    container_name: node1.organization3.example.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: node1.organization3.example.com
+    networks:
+      - byfn
+
+  node2.organization3.example.com:
+    container_name: node2.organization3.example.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: node2.organization3.example.com
+    networks:
+      - byfn
+
   cli:
     container_name: cli
     image: hyperledger/fabric-tools
@@ -89,5 +105,7 @@ services:
       - node2.organization1.example.com
       - node1.organization2.example.com
       - node2.organization2.example.com
+      - node1.organization3.example.com
+      - node2.organization3.example.com
     networks:
       - byfn

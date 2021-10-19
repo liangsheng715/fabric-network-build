@@ -88,3 +88,14 @@ PeerOrgs:
       - Hostname: node2
     Users:
       Count: 1
+
+  - Name: organization3
+    Domain: organization3.example.com
+    EnableNodeOUs: true
+    # Template:
+    #   Count: 2
+    Specs:
+      - Hostname: node1
+      - Hostname: node2
+    Users:
+      Count: 1
